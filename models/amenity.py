@@ -2,7 +2,8 @@
 """This is the amenity class"""
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, String
+from models.place import place_amenity
 
 
 class Amenity(BaseModel, Base):
@@ -10,9 +11,6 @@ class Amenity(BaseModel, Base):
     Attributes:
         name: input name
     """
-    __tablename__ = 'amenities'
+    __tablename__ = "amenities"
     name = Column(String(128), nullable=False)
-    place_amenities = relationship('Place',
-                                   secondary='place_amenity',
-                                   backref='amenities',
-                                   cascade='delete')
+    place_amenities = relationship("Place", secondary=place_amenity)
